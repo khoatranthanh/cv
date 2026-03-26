@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khoa Tran Thanh — Ruby on Rails Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0:      #0d1117;   /* page bg */
+      --bg1:      #161b22;   /* sidebar bg */
+      --bg2:      #1c2333;   /* card / entry bg */
+      --bg3:      #21262d;   /* tag bg */
+      --line:     #30363d;   /* borders / dividers */
+      --text0:    #e6edf3;   /* primary text */
+      --text1:    #8b949e;   /* secondary text */
+      --text2:    #484f58;   /* very muted */
+      --accent:   #58a6ff;   /* blue accent */
+      --green:    #3fb950;   /* "now" badge */
+      --cyan:     #39d3b5;   /* tech pills */
+      --sidebar-w: 272px;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg0);
+      color: var(--text0);
+      font-size: 13.5px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page shell ──────────────────────────────── */
+    .page {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+
+    /* ── Sidebar ─────────────────────────────────── */
+    .sidebar {
+      background: var(--bg1);
+      border-right: 1px solid var(--line);
+      padding: 44px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Profile */
+    .profile { padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+    .avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--bg3);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'Fira Code', monospace;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+    .profile-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text0);
+      line-height: 1.3;
+    }
+    .profile-role {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      font-family: 'Fira Code', monospace;
+      margin-top: 4px;
+    }
+
+    /* Sidebar section label */
+    .s-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text2);
+      margin-bottom: 12px;
+    }
+
+    /* Contact */
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12.5px;
+      color: var(--text1);
+    }
+    .c-icon {
+      width: 18px;
+      text-align: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      color: var(--text2);
+    }
+    .contact-list a { color: var(--text1); text-decoration: none; }
+    .contact-list a:hover { color: var(--accent); }
+
+    /* Skills */
+    .skill-group { margin-bottom: 14px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 7px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag {
+      font-size: 11px;
+      font-family: 'Fira Code', monospace;
+      padding: 2px 8px;
+      background: var(--bg3);
+      color: var(--text1);
+      border: 1px solid var(--line);
+      transition: color .12s, border-color .12s;
+    }
+    .tag:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Languages */
+    .lang-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .lang-row { display: flex; align-items: center; justify-content: space-between; }
+    .lang-name { font-size: 12.5px; color: var(--text1); }
+    .lang-bar {
+      width: 72px;
+      height: 3px;
+      background: var(--bg3);
+      position: relative;
+    }
+    .lang-fill {
+      position: absolute;
+      top: 0; left: 0; height: 100%;
+      background: var(--accent);
+    }
+
+    /* Interests */
+    .interest-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .interest-list li {
+      font-size: 12.5px;
+      color: var(--text1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .interest-list li::before {
+      content: '—';
+      color: var(--text2);
+      font-size: 11px;
+    }
+
+    /* ── Main ────────────────────────────────────── */
+    .main {
+      background: var(--bg0);
+      padding: 44px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    /* Section header */
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .sec-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .sec-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; }
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .entry:first-child { border-top: 1px solid var(--line); }
+
+    .entry-left { grid-column: 1; }
+    .entry-right { grid-column: 2; text-align: right; align-self: start; }
+
+    .entry-company {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text0);
+    }
+    .entry-role {
+      font-size: 12px;
+      color: var(--text1);
+      margin-top: 2px;
+    }
+    .entry-date {
+      font-size: 11.5px;
+      font-family: 'Fira Code', monospace;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+    .badge-now {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 1px 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 10px;
+    }
+    .t-pill {
+      font-size: 11px;
+      font-family: 'Fira Code', monospace;
+      padding: 2px 7px;
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid #1f3d3a;
+    }
+
+    /* Project cards — flat, border only */
+    .project-grid { display: flex; flex-direction: column; gap: 0; }
+    .proj {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .proj:first-child { border-top: 1px solid var(--line); }
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .proj-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text0);
+    }
+    .proj-date {
+      font-size: 11.5px;
+      font-family: 'Fira Code', monospace;
+      color: var(--text2);
+    }
+    .proj-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+    .proj-meta span { display: flex; align-items: center; gap: 5px; }
+    .proj-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text2);
+      margin: 12px 0 5px;
+    }
+    .bl { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .bl li {
+      padding-left: 16px;
+      position: relative;
+      font-size: 12.5px;
+      color: var(--text1);
+      line-height: 1.55;
+    }
+    .bl li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    /* Cert/Award rows */
+    .award-list { display: flex; flex-direction: column; }
+    .award-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 16px;
+    }
+    .award-row:first-child { border-top: 1px solid var(--line); }
+    .award-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text0);
+    }
+    .award-date {
+      font-size: 11.5px;
+      font-family: 'Fira Code', monospace;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    /* Print */
+    @media print {
+      body { background: #0d1117; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { border: none; max-width: 100%; }
+    }
+
+    @media (max-width: 700px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+      .main { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── SIDEBAR ──────────────────────────────── -->
+  <aside class="sidebar">
+
+    <div class="profile">
+      <div class="avatar">KT</div>
+      <div class="profile-name">Khoa Tran Thanh</div>
+      <div class="profile-role">// Ruby on Rails Developer</div>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <div class="s-label">Contact</div>
+      <ul class="contact-list">
+        <li><span class="c-icon">↗</span><span>+84 971 993 267</span></li>
+        <li><span class="c-icon">@</span><a href="mailto:khoatran.ror@gmail.com">khoatran.ror@gmail.com</a></li>
+        <li><span class="c-icon">◎</span><span>Ho Chi Minh City, VN</span></li>
+      </ul>
+    </div>
+
+    <!-- Skills -->
+    <div>
+      <div class="s-label">Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-name">Back-End</div>
+        <div class="tag-row">
+          <span class="tag">Ruby</span>
+          <span class="tag">Rails</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">PHP</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Front-End</div>
+        <div class="tag-row">
+          <span class="tag">Angular</span>
+          <span class="tag">React</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Data &amp; DevOps</div>
+        <div class="tag-row">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Docker</span>
+          <span class="tag">K8s</span>
+          <span class="tag">Karafka</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div>
+      <div class="s-label">Languages</div>
+      <ul class="lang-list">
+        <li>
+          <div class="lang-row">
+            <span class="lang-name">Vietnamese</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+          </div>
+        </li>
+        <li>
+          <div class="lang-row">
+            <span class="lang-name">English</span>
+            <div class="lang-bar"><div class="lang-fill" style="width:60%"></div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Interests -->
+    <div>
+      <div class="s-label">Interests</div>
+      <ul class="interest-list">
+        <li>Listen to music</li>
+        <li>Read newspaper</li>
+      </ul>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ──────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Education -->
+    <section>
+      <div class="sec-head"><span class="sec-label">Education</span><div class="sec-line"></div></div>
+      <div class="timeline">
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Industrial University of Ho Chi Minh City</div>
+            <div class="entry-role">Bachelor's Degree · Software Engineering</div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Sep 2011 – Feb 2015</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section>
+      <div class="sec-head"><span class="sec-label">Work Experience</span><div class="sec-line"></div></div>
+      <div class="timeline">
+
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Oivan</div>
+            <div class="entry-role">Full Stack Developer</div>
+            <div class="entry-tags">
+              <span class="t-pill">Ruby on Rails</span>
+              <span class="t-pill">Angular</span>
+              <span class="t-pill">PostgreSQL</span>
+              <span class="t-pill">MongoDB</span>
+              <span class="t-pill">Redis</span>
+              <span class="t-pill">Karafka</span>
+              <span class="t-pill">Docker</span>
+              <span class="t-pill">K8s</span>
+            </div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Aug 2022 – Present<span class="badge-now">Now</span></div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Freelancer</div>
+            <div class="entry-role">Full Stack Developer</div>
+            <div class="entry-tags">
+              <span class="t-pill">NestJS</span>
+              <span class="t-pill">React Admin</span>
+              <span class="t-pill">Next.js</span>
+              <span class="t-pill">MySQL</span>
+              <span class="t-pill">MongoDB</span>
+              <span class="t-pill">TypeORM</span>
+              <span class="t-pill">Supabase</span>
+              <span class="t-pill">WebSocket</span>
+              <span class="t-pill">Docker</span>
+            </div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Jun 2020 – Jul 2022</div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Coinhako</div>
+            <div class="entry-role">Full Stack Developer</div>
+            <div class="entry-tags">
+              <span class="t-pill">Ruby on Rails</span>
+              <span class="t-pill">AngularJS</span>
+              <span class="t-pill">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Jul 2016 – Jun 2020</div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Larion</div>
+            <div class="entry-role">Full Stack Developer</div>
+            <div class="entry-tags">
+              <span class="t-pill">Ruby on Rails</span>
+              <span class="t-pill">ReactJS</span>
+              <span class="t-pill">HTML/CSS</span>
+              <span class="t-pill">Foundation</span>
+            </div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Jul 2015 – Jul 2016</div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-left">
+            <div class="entry-company">Web4g Solutions</div>
+            <div class="entry-role">Full Stack Developer</div>
+            <div class="entry-tags">
+              <span class="t-pill">PHP (CodeIgniter)</span>
+              <span class="t-pill">HTML/CSS</span>
+              <span class="t-pill">Bootstrap</span>
+              <span class="t-pill">jQuery</span>
+            </div>
+          </div>
+          <div class="entry-right">
+            <div class="entry-date">Jul 2014 – Jul 2015</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <div class="sec-head"><span class="sec-label">Projects</span><div class="sec-line"></div></div>
+      <div class="project-grid">
+
+        <div class="proj">
+          <div class="proj-header">
+            <span class="proj-name">Oivan — sakani.sa</span>
+            <span class="proj-date">Aug 2022 – Present</span>
+          </div>
+          <div class="proj-meta">
+            <span>◎ KSA</span>
+            <span>⊞ Team of 40</span>
+            <span>⊡ Full-stack Developer</span>
+          </div>
+          <div class="entry-tags">
+            <span class="t-pill">Ruby on Rails</span>
+            <span class="t-pill">Angular</span>
+            <span class="t-pill">Docker</span>
+            <span class="t-pill">Kubernetes</span>
+          </div>
+          <div class="proj-sub">Responsibilities</div>
+          <ul class="bl">
+            <li>Built Rails APIs and Angular modules, collaborated with large cross-functional teams.</li>
+            <li>Optimized performance and supported deployments on Docker / Kubernetes.</li>
+          </ul>
+          <div class="proj-sub">What I built</div>
+          <ul class="bl">
+            <li>Real-estate workflow features: property listing, onboarding, and verification.</li>
+            <li>Scalable APIs, reusable Angular components, and government service integrations.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <span class="proj-name">Naga Games</span>
+            <span class="proj-date">Jun 2020 – Jul 2022</span>
+          </div>
+          <div class="proj-meta">
+            <span>◎ Singapore</span>
+            <span>⊞ Team of 5</span>
+            <span>⊡ Full-stack Developer</span>
+          </div>
+          <div class="entry-tags">
+            <span class="t-pill">NestJS</span>
+            <span class="t-pill">MySQL</span>
+            <span class="t-pill">React Admin</span>
+            <span class="t-pill">WebSocket</span>
+          </div>
+          <div class="proj-sub">Responsibilities</div>
+          <ul class="bl">
+            <li>Developed NestJS services and React Admin dashboards.</li>
+            <li>Fixed production issues, optimized queries, and implemented WebSocket features.</li>
+          </ul>
+          <div class="proj-sub">What I built</div>
+          <ul class="bl">
+            <li>Game provider integrations, reporting dashboards, user/game management modules.</li>
+            <li>High-performance API endpoints.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <span class="proj-name">Coinhako</span>
+            <span class="proj-date">Jul 2016 – Jun 2020</span>
+          </div>
+          <div class="proj-meta">
+            <span>◎ Singapore</span>
+            <span>⊞ Team of 15</span>
+            <span>⊡ Full-stack Developer</span>
+          </div>
+          <div class="entry-tags">
+            <span class="t-pill">Rails</span>
+            <span class="t-pill">MySQL</span>
+            <span class="t-pill">HTML5/CSS3</span>
+            <span class="t-pill">AngularJS</span>
+          </div>
+          <div class="proj-sub">Responsibilities</div>
+          <ul class="bl">
+            <li>Built e-wallet features with Rails/AngularJS and integrated broker/payment services.</li>
+            <li>Improved performance and handled critical wallet &amp; trading bugs.</li>
+          </ul>
+          <div class="proj-sub">What I built</div>
+          <ul class="bl">
+            <li>Wallet transactions, KYC/AML flows, order processing, and payout modules.</li>
+            <li>Secure 3rd-party service integrations.</li>
+          </ul>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <span class="proj-name">Larion — Various Products</span>
+            <span class="proj-date">Jul 2015 – Jun 2016</span>
+          </div>
+          <div class="proj-meta">
+            <span>◎ Vietnam</span>
+            <span>⊞ Team of 50</span>
+            <span>⊡ Developer</span>
+          </div>
+          <div class="entry-tags">
+            <span class="t-pill">Rails</span>
+            <span class="t-pill">PostgreSQL</span>
+            <span class="t-pill">HTML5/CSS3</span>
+            <span class="t-pill">jQuery</span>
+          </div>
+          <div class="proj-sub">Responsibilities</div>
+          <ul class="bl">
+            <li>Delivered Rails &amp; React features, built UI components, APIs, and supported client projects.</li>
+          </ul>
+          <div class="proj-sub">What I built</div>
+          <ul class="bl">
+            <li>Admin dashboards, authentication modules, CRUD features, and optimized front-end components.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Certifications & Awards -->
+    <section>
+      <div class="sec-head"><span class="sec-label">Certifications &amp; Awards</span><div class="sec-line"></div></div>
+      <div class="award-list">
+        <div class="award-row">
+          <span class="award-title">Professional Scrum Master I (PSM I)</span>
+          <span class="award-date">2023-03-04</span>
+        </div>
+        <div class="award-row">
+          <span class="award-title">Silver Prize — Ho Chi Minh's Skills Competition</span>
+          <span class="award-date">2014-09-05</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
