@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khoa Tran Thanh - Software Engineer | Full Stack &amp; Production Ownership</title>
+  <meta name="description"
+    content="Software Engineer with 10+ years of experience owning web and mobile products from architecture to production support, with a focus on performance, security, and maintainable code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0f172a;
+      --body: #334155;
+      --muted: #64748b;
+      --accent: #1d4ed8;
+      --accent-soft: #eaf0ff;
+      --rule: #e2e8f0;
+      --surface: #ffffff;
+      --page: #eef1f6;
+      --chip: #f6f8fb;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 16px 64px;
+    }
+
+    .sheet {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      box-shadow: 0 18px 50px -28px rgba(15, 23, 42, 0.45);
+      padding: 52px 56px 48px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    a:hover {
+      border-bottom-color: currentColor;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px 32px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .identity {
+      min-width: 260px;
+    }
+
+    h1 {
+      font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+      font-size: 27pt;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .role {
+      font-size: 10pt;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .contact {
+      font-size: 9.5pt;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.75;
+    }
+
+    .contact span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .contact strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    section {
+      padding-top: 22px;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    h2::before {
+      content: "";
+      width: 14px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex: none;
+    }
+
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .summary {
+      font-size: 10.5pt;
+      color: var(--body);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 172px 1fr;
+      gap: 9px 20px;
+    }
+
+    .skills-grid dt {
+      font-size: 9pt;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 1px;
+    }
+
+    .skills-grid dd {
+      color: var(--body);
+    }
+
+    .timeline {
+      border-left: 1px solid var(--rule);
+      padding-left: 22px;
+    }
+
+    .entry {
+      position: relative;
+      padding-bottom: 18px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .entry:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline .entry::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+    }
+
+    .entry-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 2px 16px;
+    }
+
+    .entry-title {
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .entry-title .at {
+      color: var(--accent);
+    }
+
+    .entry-date {
+      font-size: 9pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .entry-meta {
+      font-size: 9.5pt;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 9px;
+    }
+
+    .stack span {
+      font-size: 8.5pt;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--chip);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 2px 9px;
+      white-space: nowrap;
+    }
+
+    .projects {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      background: #fbfcfe;
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 14px 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .card h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .card .entry-meta {
+      margin-bottom: 8px;
+    }
+
+    .card ul {
+      margin-bottom: 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 36px;
+    }
+
+    .credential {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .print-bar {
+      max-width: 860px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .print-bar .back {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .print-bar .back:hover {
+      color: var(--accent);
+    }
+
+    .print-bar button {
+      font: inherit;
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 7px 16px;
+      cursor: pointer;
+    }
+
+    .print-bar button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 0 40px;
+      }
+
+      .sheet {
+        padding: 32px 22px 36px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      header {
+        align-items: flex-start;
+      }
+
+      .contact {
+        text-align: left;
+      }
+
+      .contact span {
+        white-space: normal;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .skills-grid dd {
+        margin-bottom: 8px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+
+      *,
+      *::before,
+      *::after {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      :root {
+        --page: #ffffff;
+      }
+
+      body {
+        background: #ffffff;
+        font-size: 9.6pt;
+        padding: 0;
+      }
+
+      .sheet {
+        max-width: 100%;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .print-bar {
+        display: none;
+      }
+
+      h1 {
+        font-size: 22pt;
+      }
+
+      section {
+        padding-top: 15px;
+        break-inside: avoid;
+      }
+
+      a {
+        color: var(--ink);
+      }
+
+      @page {
+        margin: 1.4cm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="print-bar">
+    <a class="back" href="../">&larr; Portfolio</a>
+    <button type="button" onclick="window.print()">Download PDF</button>
+  </div>
+
+  <div class="sheet">
+
+    <header>
+      <div class="identity">
+        <h1>Khoa Tran Thanh</h1>
+        <p class="role">Software Engineer &middot; Full Stack &amp; Production Ownership</p>
+      </div>
+      <p class="contact">
+        <span><strong>Phone:</strong> +84 971 993 267</span>
+        <span><strong>Email:</strong> <a href="mailto:khoatran.ror@gmail.com">khoatran.ror@gmail.com</a></span>
+        <span><strong>Location:</strong> Ho Chi Minh City, Vietnam</span>
+      </p>
+    </header>
+
+    <section>
+      <h2>Professional Summary</h2>
+      <p class="summary">
+        Software Engineer with over 10 years of experience building and maintaining web and mobile
+        products across fintech, real estate, energy, and education. Owns delivery from clarifying
+        requirements and designing APIs to implementation, deployment, monitoring, and production
+        support. Works across TypeScript, JavaScript, Ruby, and PHP, choosing tools to fit the problem
+        and the team. Prioritizes performance, security, and code that is straightforward to maintain,
+        with a practical focus on resolving issues quickly and keeping products reliable.
+      </p>
+    </section>
+
+    <section>
+      <h2>Engineering Approach</h2>
+      <dl class="skills-grid">
+        <dt>Problem solving and ownership</dt>
+        <dd>Clarify the business need, work across application layers, and carry changes through
+          deployment and support.</dd>
+
+        <dt>Performance and reliability</dt>
+        <dd>Treat responsiveness and dependable operation as priorities; use production monitoring,
+          crash reports, and logs to guide investigation.</dd>
+
+        <dt>Security</dt>
+        <dd>Experience implementing permission and approval logic, secure login, identity
+          verification, and financial risk workflows.</dd>
+
+        <dt>Maintainability</dt>
+        <dd>Reusable components, shared types, consistent API contracts, unit and integration tests,
+          and code review.</dd>
+
+        <dt>Production support</dt>
+        <dd>Hands-on release ownership, crash monitoring, and support for deposit, withdrawal, and
+          payout workflows, with a focus on prompt response and practical resolution.</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <dl class="skills-grid">
+        <dt>Languages and APIs</dt>
+        <dd>TypeScript, JavaScript (ES6+), Ruby, PHP, SQL, REST API design.</dd>
+
+        <dt>Frontend</dt>
+        <dd>React, Next.js, React Native, Expo, Angular, Tailwind CSS, Tamagui, React Query, shared
+          component libraries and design systems, HTML5, CSS3.</dd>
+
+        <dt>Backend</dt>
+        <dd>NestJS, Node.js, Supabase, Firebase, Inngest, serverless and edge functions, WebSocket,
+          Ruby on Rails, PHP.</dd>
+
+        <dt>Databases</dt>
+        <dd>PostgreSQL, MySQL, SQLite, MongoDB, Redis, TypeORM.</dd>
+
+        <dt>DevOps and Delivery</dt>
+        <dd>Vercel, Docker, Kubernetes, GitLab CI, GitHub Actions, EAS, App Store Connect, Google Play
+          Console.</dd>
+
+        <dt>Monitoring and Analytics</dt>
+        <dd>Sentry, PostHog.</dd>
+
+        <dt>Ways of working</dt>
+        <dd>Solo and small-team ownership, Agile, Scrum, code review, CI/CD, AI-assisted development
+          with Claude Code.</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Work Experience</h2>
+      <div class="timeline">
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Full Stack Developer <span class="at">&middot; Oivan</span></span>
+            <span class="entry-date">August 2022 - Present</span>
+          </div>
+          <p class="entry-meta">Ho Chi Minh City, Vietnam</p>
+          <ul>
+            <li>Deliver features across backend services, REST APIs, and the Angular front end for Sakani,
+              a large Saudi housing platform serving developers, brokers, and home buyers.</li>
+            <li>Build reusable form and table components across modules to keep UI behavior consistent
+              and reduce duplicated code; deliver map-based property search, Arabic and English
+              localization, and Hijri date handling.</li>
+            <li>Deliver project, booking, price quotation, and subsidy contract workflows end to end,
+              implementing permission checks and approval logic as part of the core business flows.</li>
+            <li>Integrate government, banking, and payment services, and keep the API contract between
+              backend and front end consistent and typed.</li>
+            <li>Write unit and integration tests, review merge requests, and own tickets from development
+              through code review, continuous integration, and deployment.</li>
+          </ul>
+          <p class="stack">
+            <span>TypeScript</span><span>Angular</span><span>Ruby on Rails</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Karafka</span><span>Docker</span><span>Kubernetes</span><span>GitLab CI</span>
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Full Stack Developer <span class="at">&middot; Freelance</span></span>
+            <span class="entry-date">June 2020 - July 2022</span>
+          </div>
+          <p class="entry-meta">Ho Chi Minh City, Vietnam</p>
+          <ul>
+            <li>Owned architecture, implementation, and delivery for two products as the sole or lead
+              developer, working directly with founders to turn requirements into backend, web, and
+              mobile functionality.</li>
+            <li>Built Modern Wealth Academy, a crypto education platform with a Next.js web dashboard and
+              a React Native mobile app on a shared Supabase backend; integrated Stripe, Zoom, and
+              Calendly to cover sign-up, identity verification, contract signing, payment, class booking,
+              and course access.</li>
+            <li>Built Slim Wonen, a Netherlands-based energy management product, covering a React Native
+              mobile app, a Next.js admin dashboard, and a public marketing website on one shared
+              backend.</li>
+            <li>Shared types and UI components across web and mobile to reduce duplication and keep
+              clients consistent as APIs evolved, making changes easier to maintain across platforms.</li>
+            <li>Deployed serverless APIs and scheduled jobs on Vercel, Supabase, and Inngest, and shipped
+              releases to the App Store and Google Play while monitoring crashes and usage in production
+              through Sentry and PostHog.</li>
+          </ul>
+          <p class="stack">
+            <span>TypeScript</span><span>Node.js</span><span>NestJS</span><span>Next.js</span><span>React</span><span>React Native</span><span>Expo</span><span>Supabase</span><span>Firebase</span><span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span><span>TypeORM</span><span>Tailwind CSS</span><span>Tamagui</span><span>React Query</span><span>WebSocket</span><span>Vercel</span><span>Docker</span>
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Full Stack Developer <span class="at">&middot; Coinhako</span></span>
+            <span class="entry-date">July 2016 - June 2020</span>
+          </div>
+          <p class="entry-meta">Singapore (Remote)</p>
+          <ul>
+            <li>Built and maintained backend services and REST APIs for a licensed Singapore
+              cryptocurrency exchange used by both web and mobile clients, and contributed to the
+              JavaScript front end.</li>
+            <li>Developed wallet features, order handling, and trading integrations with partner
+              services, with a strong focus on data accuracy and reliability.</li>
+            <li>Implemented customer verification, risk, and compliance workflows for financial operations.</li>
+            <li>Owned deposit, withdrawal, and payout features through production support, including
+              reconciliation and logging to support investigation of transaction issues.</li>
+          </ul>
+          <p class="stack">
+            <span>Ruby on Rails</span><span>JavaScript</span><span>AngularJS</span><span>PostgreSQL</span><span>REST API</span><span>Agile</span>
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Full Stack Developer <span class="at">&middot; Larion</span></span>
+            <span class="entry-date">July 2015 - July 2016</span>
+          </div>
+          <p class="entry-meta">Ho Chi Minh City, Vietnam</p>
+          <ul>
+            <li>Built web applications for international clients, contributing to both backend APIs and
+              ReactJS front-end components.</li>
+          </ul>
+          <p class="stack">
+            <span>ReactJS</span><span>JavaScript</span><span>Ruby on Rails</span><span>Foundation</span>
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Full Stack Developer <span class="at">&middot; Web4g Solutions</span></span>
+            <span class="entry-date">July 2014 - July 2015</span>
+          </div>
+          <p class="entry-meta">Ho Chi Minh City, Vietnam</p>
+          <ul>
+            <li>Developed web applications and responsive front-end interfaces with JavaScript, jQuery,
+              and Bootstrap.</li>
+          </ul>
+          <p class="stack">
+            <span>PHP</span><span>CodeIgniter</span><span>JavaScript</span><span>jQuery</span><span>Bootstrap</span><span>MySQL</span>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Projects</h2>
+      <div class="projects">
+        <div class="card">
+          <h3>Sakani (Oivan)</h3>
+          <p class="entry-meta">Saudi Arabia &nbsp;|&nbsp; Team of 40 &nbsp;|&nbsp; TypeScript, Angular, Ruby on Rails
+          </p>
+          <ul>
+            <li>Contributed to a large Saudi housing platform serving real-estate developers, brokers, and
+              home buyers, working on both the Angular front end and the backend APIs behind it.</li>
+            <li>Developed project, booking, price quotation, and subsidy contract workflows, including
+              permission and approval logic.</li>
+            <li>Integrated government, banking, and payment services, and supported Hijri dates, Arabic
+              and English localization, and map-based property search.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Coinhako Exchange</h3>
+          <p class="entry-meta">Singapore &nbsp;|&nbsp; Team of 15 &nbsp;|&nbsp; Ruby on Rails, JavaScript, PostgreSQL
+          </p>
+          <ul>
+            <li>Built and maintained services and REST APIs for a licensed Singapore cryptocurrency
+              exchange.</li>
+            <li>Developed wallet features, order handling, and trading integrations with partner
+              services.</li>
+            <li>Built customer verification, risk, and compliance flows to meet Singapore financial
+              regulations.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Modern Wealth Academy</h3>
+          <p class="entry-meta">Singapore &nbsp;|&nbsp; Team of 10 &nbsp;|&nbsp; TypeScript, Next.js, React Native,
+            Supabase, Stripe</p>
+          <ul>
+            <li>Built a crypto education platform with a Next.js web dashboard and a React Native mobile
+              app backed by a shared Supabase database.</li>
+            <li>Implemented the full student journey including sign-up, identity verification, contract
+              signing, payment, class booking, and course access via Stripe, Zoom, and Calendly.</li>
+            <li>Built dashboards and reports for coaches and administrators to track revenue, attendance,
+              and student progress, with Excel and PDF export.</li>
+            <li>Set up background jobs and email workflows for onboarding, reminders, and follow-ups, and
+              shipped the mobile app with push notifications and secure login.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Slim Wonen</h3>
+          <p class="entry-meta">Netherlands &nbsp;|&nbsp; Team of 3 &nbsp;|&nbsp; TypeScript, React Native, Next.js,
+            Supabase</p>
+          <ul>
+            <li>Worked on a three-person core team on an energy-management product covering a React Native
+              mobile app, a Next.js admin dashboard, and a public website on a shared backend.</li>
+            <li>Built core mobile features including sign-in, household onboarding, energy dashboards, and
+              push notifications, sharing types and UI components with the web dashboard.</li>
+            <li>Managed the release process end to end: building, publishing to the App Store and Google
+              Play, and monitoring crashes and user activity in production.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="footer-grid">
+        <div>
+          <h2>Education</h2>
+          <p class="credential">Bachelor's Degree in Software Engineering</p>
+          <p class="entry-meta">Industrial University of Ho Chi Minh City &nbsp;|&nbsp; 2011 - 2015</p>
+        </div>
+        <div>
+          <h2>Languages</h2>
+          <ul>
+            <li>Vietnamese - Native.</li>
+            <li>English - Professional Working Proficiency.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications and Awards</h2>
+      <ul>
+        <li>Professional Scrum Master I (PSM I), Scrum.org, 2023.</li>
+        <li>Silver Prize, Ho Chi Minh City Skills Competition - Web Services Category, 2014.</li>
+      </ul>
+    </section>
+
+  </div>
+  <script>
+    if (new URLSearchParams(location.search).has("download")) {
+      document.fonts.ready.then(() => window.print());
+    }
+  </script>
+</body>
+
+</html>
