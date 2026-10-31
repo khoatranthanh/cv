@@ -8,10 +8,19 @@
   <meta name="description"
     content="Khoa Tran Thanh is a full-stack software engineer in Ho Chi Minh City with 10+ years building web and mobile products for fintech, real estate, energy, and education." />
   <meta name="theme-color" content="#1f3ae0" />
+  <script>
+    try {
+      if (localStorage.getItem("mode") === "power") {
+        document.documentElement.dataset.mode = "power";
+      }
+    } catch (error) {
+      document.documentElement.dataset.mode = "base";
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Bangers&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -27,6 +36,14 @@
       --color-on-blue: oklch(97% 0.01 85);
       --color-on-blue-muted: oklch(84% 0.06 266);
       --color-focus: oklch(62% 0.22 266);
+      --color-gi: oklch(72% 0.19 50);
+      --color-gold: oklch(87% 0.17 92);
+      --color-flash: oklch(98% 0.05 100);
+      --color-star: oklch(50% 0.2 28);
+      --color-dot: oklch(82% 0.06 85);
+      --color-scouter: oklch(86% 0.2 145);
+      --color-scouter-bg: oklch(22% 0.05 150);
+      --color-scouter-line: oklch(42% 0.1 148);
 
       --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
       --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
@@ -759,6 +776,345 @@
       color: var(--color-on-blue-muted);
     }
 
+    .power-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font: inherit;
+      white-space: nowrap;
+      color: var(--color-ink);
+      background: transparent;
+      border: 1px solid var(--color-rule);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    }
+
+    .power-toggle:hover {
+      border-color: var(--color-ink);
+      background: var(--color-paper-2);
+    }
+
+    .power-toggle:active {
+      transform: translateY(1px);
+    }
+
+    .power-toggle i {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, var(--color-gold), var(--color-gi) 70%);
+    }
+
+    .power-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(circle, var(--color-flash) 0%, var(--color-gold) 45%, var(--color-gi) 100%);
+    }
+
+    .power-flash.run {
+      animation: flash 720ms var(--ease-in-out);
+    }
+
+    @keyframes flash {
+      0% {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+
+      45% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    .balls {
+      display: none;
+    }
+
+    [data-mode="power"] {
+      --color-paper: oklch(95% 0.04 90);
+      --color-paper-2: oklch(90% 0.07 88);
+      --color-ink: oklch(16% 0.02 264);
+      --color-body: oklch(26% 0.02 264);
+      --color-muted: oklch(38% 0.02 264);
+      --color-rule: oklch(20% 0.02 264);
+      --color-blue: oklch(40% 0.19 262);
+      --color-blue-deep: oklch(32% 0.16 262);
+      --font-display: "Bangers", "Impact", sans-serif;
+    }
+
+    [data-mode="power"] .power-toggle {
+      background: var(--color-gi);
+      border-color: var(--color-ink);
+    }
+
+    [data-mode="power"] .mark i {
+      border-radius: 50%;
+      background: var(--color-gi);
+    }
+
+    [data-mode="power"] .hero {
+      background-color: var(--color-paper);
+      background-image:
+        radial-gradient(var(--color-dot) 1.5px, transparent 1.6px),
+        repeating-conic-gradient(from 0deg at 50% 42%, var(--color-gold) 0deg 5deg, transparent 5deg 11deg);
+      background-size: 12px 12px, 100% 100%;
+      background-position: 0 0, 0 0;
+      border-bottom: 4px solid var(--color-ink);
+    }
+
+    [data-mode="power"] .hero::after {
+      display: none;
+    }
+
+    [data-mode="power"] .hero-meta {
+      color: var(--color-ink);
+    }
+
+    [data-mode="power"] .name,
+    [data-mode="power"] .statement,
+    [data-mode="power"] .figures b,
+    [data-mode="power"] .block-head h2,
+    [data-mode="power"] .work h3,
+    [data-mode="power"] .mail {
+      font-weight: 400;
+      font-stretch: 100%;
+      letter-spacing: 0.02em;
+    }
+
+    [data-mode="power"] .name {
+      font-size: clamp(4.5rem, 19vw, 16rem);
+      line-height: 0.9;
+      color: var(--color-gi);
+      -webkit-text-stroke: 0.035em var(--color-ink);
+      paint-order: stroke fill;
+      text-shadow: 0.05em 0.05em 0 var(--color-ink);
+      transform: rotate(-2deg);
+    }
+
+    [data-mode="power"] .hero-foot {
+      background: var(--color-paper);
+      border: 3px solid var(--color-ink);
+      box-shadow: 8px 8px 0 var(--color-ink);
+      padding: var(--space-lg);
+    }
+
+    [data-mode="power"] .btn {
+      border-width: 3px;
+    }
+
+    [data-mode="power"] .btn.primary {
+      background: var(--color-gi);
+      border-color: var(--color-ink);
+      color: var(--color-ink);
+    }
+
+    [data-mode="power"] .btn.primary:hover {
+      background: var(--color-gold);
+      border-color: var(--color-ink);
+    }
+
+    [data-mode="power"] .band {
+      border-bottom: 4px solid var(--color-ink);
+    }
+
+    [data-mode="power"] .statement {
+      font-size: clamp(2.75rem, 7vw, 5.75rem);
+    }
+
+    [data-mode="power"] .statement span {
+      color: var(--color-gold);
+    }
+
+    [data-mode="power"] .figures b {
+      color: var(--color-gold);
+      font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+    }
+
+    [data-mode="power"] section.block {
+      border-bottom: 4px solid var(--color-ink);
+    }
+
+    [data-mode="power"] .block-head h2 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--color-blue);
+    }
+
+    [data-mode="power"] .work {
+      border-top: 0;
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    [data-mode="power"] .work li {
+      background: var(--color-paper);
+      border: 3px solid var(--color-ink);
+      box-shadow: 6px 6px 0 var(--color-ink);
+      padding: var(--space-lg);
+      transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+    }
+
+    [data-mode="power"] .work li:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--color-gi);
+    }
+
+    [data-mode="power"] .work li::before {
+      display: none;
+    }
+
+    [data-mode="power"] .work h3 {
+      font-size: clamp(2.25rem, 3.8vw, 3rem);
+    }
+
+    [data-mode="power"] .work .idx {
+      color: var(--color-blue);
+    }
+
+    [data-mode="power"] .tags span {
+      border-color: var(--color-ink);
+    }
+
+    [data-mode="power"] .stack-grid {
+      border: 3px solid var(--color-ink);
+      box-shadow: 6px 6px 0 var(--color-ink);
+      background: var(--color-scouter-bg);
+    }
+
+    [data-mode="power"] .stack-grid div {
+      border-color: var(--color-scouter-line);
+    }
+
+    [data-mode="power"] .stack-grid h3,
+    [data-mode="power"] .stack-grid p {
+      color: var(--color-scouter);
+    }
+
+    [data-mode="power"] .stack-grid p {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+    }
+
+    [data-mode="power"] .contact {
+      border-top: 4px solid var(--color-gi);
+    }
+
+    [data-mode="power"] .mail {
+      font-size: clamp(1.6rem, 7.6vw, 6.5rem);
+      color: var(--color-gold);
+      background-image: linear-gradient(var(--color-gi), var(--color-gi));
+    }
+
+    [data-mode="power"] .mail:hover {
+      color: var(--color-ink);
+    }
+
+    [data-mode="power"] .balls {
+      position: fixed;
+      right: 14px;
+      top: 50%;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      list-style: none;
+      transform: translateY(-50%);
+    }
+
+    .balls a {
+      display: block;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--color-ink);
+      border-radius: 50%;
+      background: var(--color-paper-2);
+      opacity: 0.55;
+      transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    }
+
+    .balls a:hover {
+      opacity: 1;
+      transform: scale(1.12);
+    }
+
+    .balls a.found {
+      opacity: 1;
+      background: radial-gradient(circle at 35% 30%, var(--color-flash), var(--color-gold) 30%, var(--color-gi) 80%);
+    }
+
+    .balls svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: var(--color-muted);
+    }
+
+    .balls a.found svg {
+      fill: var(--color-star);
+    }
+
+    [data-wish="granted"] .balls a {
+      box-shadow: 0 0 10px 2px var(--color-gold);
+    }
+
+    @media (max-width: 1400px) {
+      [data-mode="power"] .balls {
+        right: 6px;
+      }
+
+      .balls a {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .power-toggle span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+
+      [data-mode="power"] .balls {
+        top: auto;
+        right: 50%;
+        bottom: 10px;
+        flex-direction: row;
+        gap: 5px;
+        padding: 6px 10px;
+        background: var(--color-ink);
+        border-radius: 999px;
+        transform: translateX(50%);
+      }
+
+      .balls a {
+        opacity: 1;
+        background: var(--color-paper-2);
+      }
+
+      [data-mode="power"] .hero-foot,
+      [data-mode="power"] .work li {
+        padding: var(--space-md);
+        box-shadow: 4px 4px 0 var(--color-ink);
+      }
+
+      [data-mode="power"] .contact {
+        padding-bottom: var(--space-2xl);
+      }
+    }
+
     @media (max-width: 1024px) {
       .hero-foot {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -867,6 +1223,10 @@
       *::after {
         transition-duration: 1ms !important;
       }
+
+      .power-flash.run {
+        animation-duration: 150ms;
+      }
     }
   </style>
 </head>
@@ -880,6 +1240,7 @@
         <a href="#experience">Experience</a>
         <a href="#stack">Stack</a>
         <a href="#contact">Contact</a>
+        <button class="power-toggle mono" type="button" id="power-toggle" aria-label="Power up"><i></i><span>Power up</span></button>
         <a class="pill" href="cv/">Resume
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
             <path d="M4 12 12 4M6 4h6v6" />
@@ -930,7 +1291,7 @@
       </div>
     </section>
 
-    <section class="band" aria-label="In short">
+    <section class="band" id="in-short" aria-label="In short">
       <div class="wrap">
         <p class="statement">Requirements, APIs, releases, monitoring, support. <span>One engineer who owns the whole
             loop.</span></p>
@@ -946,13 +1307,13 @@
     <section class="block" id="work">
       <div class="wrap">
         <div class="block-head">
-          <h2>Selected work</h2>
+          <h2 data-power="The Sagas">Selected work</h2>
           <p>Products I built, shipped, and supported in production, for teams ranging from three people to forty.</p>
         </div>
 
         <ol class="work">
           <li>
-            <span class="idx mono">01</span>
+            <span class="idx mono" data-power="Saga 1">01</span>
             <div>
               <h3><a class="visit" href="https://sakani.sa/" target="_blank" rel="noopener">Sakani<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a></h3>
               <p class="where mono">Oivan / Saudi Arabia / Team of 40</p>
@@ -967,7 +1328,7 @@
           </li>
 
           <li>
-            <span class="idx mono">02</span>
+            <span class="idx mono" data-power="Saga 2">02</span>
             <div>
               <h3><a class="visit" href="https://www.coinhako.com/" target="_blank" rel="noopener">Coinhako<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a></h3>
               <p class="where mono">Singapore / Team of 15</p>
@@ -981,7 +1342,7 @@
           </li>
 
           <li>
-            <span class="idx mono">03</span>
+            <span class="idx mono" data-power="Saga 3">03</span>
             <div>
               <h3><a class="visit" href="https://modernwealth.academy/" target="_blank" rel="noopener">Modern Wealth Academy<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a></h3>
               <p class="where mono">Singapore / Team of 10</p>
@@ -995,7 +1356,7 @@
           </li>
 
           <li>
-            <span class="idx mono">04</span>
+            <span class="idx mono" data-power="Saga 4">04</span>
             <div>
               <h3><a class="visit" href="https://slimwonenapp.nl/" target="_blank" rel="noopener">Slim Wonen<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" /></svg></a></h3>
               <p class="where mono">Netherlands / Team of 3</p>
@@ -1013,9 +1374,9 @@
 
     <section class="block" id="experience">
       <div class="wrap split">
-        <div>
+        <div id="how">
           <div class="block-head">
-            <h2>How I work</h2>
+            <h2 data-power="Training Rules">How I work</h2>
           </div>
           <ul class="principles">
             <li>
@@ -1039,9 +1400,9 @@
           </ul>
         </div>
 
-        <div>
+        <div id="story">
           <div class="block-head">
-            <h2>Experience</h2>
+            <h2 data-power="The Story So Far">Experience</h2>
           </div>
           <ol class="timeline">
             <li class="now">
@@ -1087,7 +1448,7 @@
     <section class="block" id="stack">
       <div class="wrap">
         <div class="block-head">
-          <h2>Toolbox</h2>
+          <h2 data-power="Scouter Readout">Toolbox</h2>
           <p>Chosen to fit the problem and the team, not the other way around.</p>
         </div>
 
@@ -1145,7 +1506,7 @@
 
   <footer class="contact" id="contact">
     <div class="wrap">
-      <p class="mono">Have a product that needs an owner?</p>
+      <p class="mono" id="wish" aria-live="polite">Have a product that needs an owner?</p>
       <a class="mail" href="mailto:khoatran.ror@gmail.com">khoatran.ror@gmail.com</a>
       <div class="contact-row">
         <dl class="mono">
@@ -1179,6 +1540,9 @@
     </div>
   </footer>
 
+  <div class="power-flash" id="power-flash" aria-hidden="true"></div>
+  <ol class="balls" id="balls" aria-label="Sections"></ol>
+
   <script>
     const clock = document.getElementById("clock");
     const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -1192,6 +1556,111 @@
     tick();
     setInterval(tick, 30000);
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const toggle = document.getElementById("power-toggle");
+    const flash = document.getElementById("power-flash");
+    const wish = document.getElementById("wish");
+    const wishBase = wish.textContent;
+    const swaps = [...document.querySelectorAll("[data-power]")].map((node) => ({
+      node,
+      base: node.textContent,
+      power: node.dataset.power,
+    }));
+
+    const applyMode = () => {
+      const powered = root.dataset.mode === "power";
+      const label = powered ? "Power down" : "Power up";
+      toggle.querySelector("span").textContent = label;
+      toggle.setAttribute("aria-label", label);
+      swaps.forEach(({ node, base, power }) => {
+        node.textContent = powered ? power : base;
+      });
+      wish.textContent = powered && root.dataset.wish === "granted" ? "All seven found. Make your wish:" : wishBase;
+    };
+
+    const saveMode = (mode) => {
+      try {
+        localStorage.setItem("mode", mode);
+      } catch (error) {
+        return;
+      }
+    };
+
+    const switchMode = () => {
+      root.dataset.mode = root.dataset.mode === "power" ? "base" : "power";
+      saveMode(root.dataset.mode);
+      applyMode();
+    };
+
+    toggle.addEventListener("click", () => {
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      flash.classList.remove("run");
+      void flash.offsetWidth;
+      flash.classList.add("run");
+      setTimeout(switchMode, reduced ? 0 : 320);
+    });
+
+    flash.addEventListener("animationend", () => flash.classList.remove("run"));
+
+    const starLayouts = [
+      [[12, 12]],
+      [[8, 12], [16, 12]],
+      [[12, 7], [7.5, 15], [16.5, 15]],
+      [[8, 8], [16, 8], [8, 16], [16, 16]],
+      [[12, 12], [7, 7], [17, 7], [7, 17], [17, 17]],
+      [[8, 6], [16, 6], [8, 12], [16, 12], [8, 18], [16, 18]],
+      [[12, 12], [12, 5], [12, 19], [6, 8.5], [18, 8.5], [6, 15.5], [18, 15.5]],
+    ];
+    const starPath = (x, y) => {
+      const points = Array.from({ length: 10 }, (_, index) => {
+        const radius = index % 2 === 0 ? 2.5 : 1;
+        const angle = (Math.PI / 5) * index - Math.PI / 2;
+        return `${(x + radius * Math.cos(angle)).toFixed(2)} ${(y + radius * Math.sin(angle)).toFixed(2)}`;
+      });
+      return `<path d="M${points.join("L")}Z" />`;
+    };
+
+    const stops = [
+      ["top", "Intro"],
+      ["in-short", "In short"],
+      ["work", "Work"],
+      ["how", "How I work"],
+      ["story", "Experience"],
+      ["stack", "Stack"],
+      ["contact", "Contact"],
+    ];
+    const ballList = document.getElementById("balls");
+    ballList.innerHTML = stops
+      .map(([id, name], index) => {
+        const stars = starLayouts[index].map(([x, y]) => starPath(x, y)).join("");
+        return `<li><a href="#${id}" aria-label="${name}"><svg viewBox="0 0 24 24" aria-hidden="true">${stars}</svg></a></li>`;
+      })
+      .join("");
+
+    const collect = (id) => {
+      ballList.querySelector(`a[href="#${id}"]`).classList.add("found");
+      if (!ballList.querySelector("a:not(.found)")) {
+        root.dataset.wish = "granted";
+        applyMode();
+      }
+    };
+    const collectOnView = (rootMargin, ids) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
+            collect(entry.target.id);
+            observer.unobserve(entry.target);
+          });
+        },
+        { rootMargin },
+      );
+      ids.forEach((id) => observer.observe(document.getElementById(id)));
+    };
+    collectOnView("-35% 0px -35% 0px", stops.slice(0, 6).map(([id]) => id));
+    collectOnView("0px", ["contact"]);
+
+    applyMode();
   </script>
 </body>
 
