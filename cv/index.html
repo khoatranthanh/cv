@@ -7,6 +7,7 @@
   <title>Khoa Tran Thanh - Software Engineer | Full Stack &amp; Production Ownership</title>
   <meta name="description"
     content="Software Engineer with 10+ years of experience owning web and mobile products from architecture to production support, with a focus on performance, security, and maintainable code." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -181,8 +182,6 @@
     .entry {
       position: relative;
       padding-bottom: 18px;
-      break-inside: avoid;
-      page-break-inside: avoid;
     }
 
     .entry:last-child {
@@ -331,7 +330,7 @@
       color: var(--accent);
     }
 
-    .print-bar button {
+    .print-bar .download {
       font: inherit;
       font-size: 9.5pt;
       font-weight: 600;
@@ -343,7 +342,7 @@
       cursor: pointer;
     }
 
-    .print-bar button:hover {
+    .print-bar .download:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -423,6 +422,20 @@
 
       section {
         padding-top: 15px;
+      }
+
+      h2 {
+        letter-spacing: 0.04em;
+        break-after: avoid;
+      }
+
+      .entry-header {
+        break-after: avoid;
+      }
+
+      .entry li,
+      .card,
+      .skills-grid > * {
         break-inside: avoid;
       }
 
@@ -440,7 +453,7 @@
 <body>
   <div class="print-bar">
     <a class="back" href="../">&larr; Portfolio</a>
-    <button type="button" onclick="window.print()">Download PDF</button>
+    <a class="download" href="../Khoa_Tran_Thanh_CV.pdf" download>Download PDF</a>
   </div>
 
   <div class="sheet">
